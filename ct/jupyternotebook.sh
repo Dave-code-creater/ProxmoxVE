@@ -20,7 +20,7 @@ var_os="ubuntu"
 # Default OS (e.g. debian, ubuntu, alpine)
 var_version="22.04"
 # Default OS version (e.g. 12 for debian, 24.04 for ubuntu, 3.20 for alpine)
-var_unprivileged="[UNPRIVILEGED]"
+var_unprivileged="0"
 # 1 = unprivileged container, 0 = privileged container
 
 header_info "$APP"
