@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2025 community-scripts ORG
 # Author: [Dave-code-creater (Tan Dat, Ta)]
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
-# Source: [SOURCE_URL]
+# Source: [https://jupyter.org/]
 
 # Import Functions und Setup
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
@@ -28,6 +28,7 @@ msg_ok "Installed Dependencies"
 # Setup Application (Jupyter Notebook)"
 msg_info "Setting up Jupyter Notebook"
 pip3 install jupyter
+jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root --generate-config
 msg_ok "Jupyter Notebook Installed"
 
 motd_ssh

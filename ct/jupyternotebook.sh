@@ -20,7 +20,7 @@ var_os="ubuntu"
 # Default OS (e.g. debian, ubuntu, alpine)
 var_version="22.04"
 # Default OS version (e.g. 12 for debian, 24.04 for ubuntu, 3.20 for alpine)
-var_unprivileged="0"
+var_unprivileged="1"
 # 1 = unprivileged container, 0 = privileged container
 
 header_info "$APP"
@@ -32,16 +32,10 @@ function update_script() {
     header_info
     check_container_storage
     check_container_resources
-
-    # Check if installation is present | -f for file, -d for folder
-    if [[ ! -f /etc/apt/sources.list.d/jupyter-notebook.list ]]; then
-        msg_error "No ${APP} Installation Found!"
-        exit
-    fi
     
     msg_info "Updating ${APP} LXC"
     apt-get update &>/dev/null
-    apt-get install -y jupyter-notebook &>/dev/null
+    apt-get install -y upgrade &>/dev/null
     msg_ok "Updated Successfully"
     exit
 }
