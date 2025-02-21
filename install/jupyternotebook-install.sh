@@ -28,7 +28,7 @@ msg_ok "Installed Dependencies"
 # Setup Application (Jupyter Notebook)"
 msg_info "Setting up Jupyter Notebook"
 pip3 install jupyter
-jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root --generate-config
+$STD jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root --generate-config
 msg_ok "Jupyter Notebook Installed"
 
 motd_ssh
