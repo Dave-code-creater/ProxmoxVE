@@ -28,9 +28,25 @@ msg_ok "Ins talled Dependencies"
 # Setup Application (Jupyter Notebook)"
 msg_info "Setting up Jupyter Notebook"
 pip3 install jupyter
-jupyter notebook --generate-config
-jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root 
 msg_ok "Jupyter Notebook Installed"
+
+msg_info "Creating Service"
+cat << EOF >/etc/systemd/system/jupyternotebook.service
+[Unit]
+Description=Jupyter Notebook Server
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/jupyter-notebook --ip=0.0.0.0 --port=8888 --allow-root
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl daemon-reload
+systemctl enable --now jupyternotebook.service
 
 motd_ssh
 customize
