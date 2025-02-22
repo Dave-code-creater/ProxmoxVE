@@ -38,7 +38,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/jupyter-notebook --ip=0.0.0.0 --port=8888 --allow-root
+ExecStart=jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root
 Restart=always
 RestartSec=10
 
