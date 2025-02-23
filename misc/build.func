@@ -15,6 +15,7 @@ variables() {
 }
 
 source <(curl -s https://raw.githubusercontent.com/dave-code-creater/ProxmoxVE/refs/heads/jupyter_notebook/misc/api.func)
+
 # This function sets various color variables using ANSI escape codes for formatting text in the terminal.
 color() {
   # Colors
@@ -68,7 +69,8 @@ catch_errors() {
 
 # This function is called when an error occurs. It receives the exit code, line number, and command that caused the error, and displays an error message.
 error_handler() {
-  source /dev/stdin <<< $(wget -qLO - https://raw.githubusercontent.com/dave-code-creater/ProxmoxVE/refs/heads/jupyter_notebook/misc/api.func)  if [ -n "$SPINNER_PID" ] && ps -p $SPINNER_PID > /dev/null; then kill $SPINNER_PID > /dev/null; fi
+  source /dev/stdin <<< $(wget -qLO - https://raw.githubusercontent.com/dave-code-creater/ProxmoxVE/refs/heads/jupyter_notebook/misc/api.func)																															   
+  if [ -n "$SPINNER_PID" ] && ps -p $SPINNER_PID > /dev/null; then kill $SPINNER_PID > /dev/null; fi
   printf "\e[?25h"
   local exit_code="$?"
   local line_number="$1"
@@ -241,7 +243,8 @@ update_motd_ip() {
 # Function to download & save header files
 get_header() {
   local app_name=$(echo ${APP,,} | tr -d ' ') 
-  local header_url="https://raw.githubusercontent.com/dave-code-creater/ProxmoxVE/refs/heads/jupyter_notebook/ct/headers/${app_name}"  local local_header_path="/usr/local/community-scripts/headers/${app_name}"
+  local header_url="https://raw.githubusercontent.com/dave-code-creater/ProxmoxVE/refs/heads/jupyter_notebook/ct/headers/${app_name}"
+  local local_header_path="/usr/local/community-scripts/headers/${app_name}"
 
   mkdir -p "/usr/local/community-scripts/headers"
 
@@ -1058,6 +1061,7 @@ build_container() {
   "
   # This executes create_lxc.sh and creates the container and .conf file
   bash -c "$(wget -qLO - https://raw.githubusercontent.com/dave-code-creater/ProxmoxVE/refs/heads/jupyter_notebook/ct/create_lxc.sh)" || exit $?
+
   LXC_CONFIG=/etc/pve/lxc/${CTID}.conf
   if [ "$CT_TYPE" == "0" ]; then
     cat <<EOF >>$LXC_CONFIG
@@ -1119,6 +1123,7 @@ EOF'
     pct exec "$CTID" -- ash -c "apk add bash >/dev/null"
   fi
   lxc-attach -n "$CTID" -- bash -c "$(wget -qLO - https://raw.githubusercontent.com/dave-code-creater/ProxmoxVE/refs/heads/jupyter_notebook/install/$var_install.sh)" || exit $?
+
 }
 
 # This function sets the description of the container.
@@ -1130,14 +1135,15 @@ description() {
     cat <<EOF
 <div align='center'>
   <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>
-    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>
+    <img src='https://raw.githubusercontent.com/dave-code-creater/ProxmoxVE/refs/heads/jupyter_notebook/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>
   </a>
 
   <h2 style='font-size: 24px; margin: 20px 0;'>${APP} LXC</h2>
 
   <p style='margin: 16px 0;'>
     <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>
-    <img src='https://raw.githubusercontent.com/dave-code-creater/ProxmoxVE/refs/heads/jupyter_notebook/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>    </a>
+      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />
+    </a>
   </p>
   
   <span style='margin: 0 10px;'>
