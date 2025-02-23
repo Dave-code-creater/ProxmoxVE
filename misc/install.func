@@ -56,8 +56,7 @@ catch_errors() {
 
 # This function handles errors
 error_handler() {
-  source <(wget -qLO - https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/api.func)
-  if [ -n "$SPINNER_PID" ] && ps -p $SPINNER_PID > /dev/null; then kill $SPINNER_PID > /dev/null; fi
+ source <(wget -qLO - https://raw.githubusercontent.com/dave-code-creater/ProxmoxVE/refs/heads/jupyter_notebook/misc/api.func)  if [ -n "$SPINNER_PID" ] && ps -p $SPINNER_PID > /dev/null; then kill $SPINNER_PID > /dev/null; fi
   printf "\e[?25h"
   local exit_code="$?"
   local line_number="$1"
@@ -218,8 +217,7 @@ motd_ssh() {
   PROFILE_FILE="/etc/profile.d/00_lxc-details.sh"
   echo "echo -e \"\"" > "$PROFILE_FILE"
   echo -e "echo -e \"${BOLD}${APPLICATION} LXC Container${CL}"\" >> "$PROFILE_FILE"
-  echo -e "echo -e \"${TAB}${GATEWAY}${YW} Provided by: ${GN}community-scripts ORG ${YW}| GitHub: ${GN}https://github.com/community-scripts/ProxmoxVE${CL}\"" >> "$PROFILE_FILE"
-  echo "echo \"\"" >> "$PROFILE_FILE"
+  echo -e "echo -e \"${TAB}${GATEWAY}${YW} Provided by: ${GN}community-scripts ORG ${YW}| GitHub: ${GN}https://raw.githubusercontent.com/dave-code-creater/ProxmoxVE/refs/heads/jupyter_notebook\"" >> "$PROFILE_FILE"  echo "echo \"\"" >> "$PROFILE_FILE"
   echo -e "echo -e \"${TAB}${OS}${YW} OS: ${GN}${OS_NAME} - Version: ${OS_VERSION}${CL}\"" >> "$PROFILE_FILE"
   echo -e "echo -e \"${TAB}${HOSTNAME}${YW} Hostname: ${GN}\$(hostname)${CL}\"" >> "$PROFILE_FILE"
   echo -e "echo -e \"${TAB}${INFO}${YW} IP Address: ${GN}\$(hostname -I | awk '{print \$1}')${CL}\"" >> "$PROFILE_FILE"
@@ -248,8 +246,8 @@ EOF
     systemctl restart $(basename $(dirname $GETTY_OVERRIDE) | sed 's/\.d//')
     msg_ok "Customized Container"
   fi
-  echo "bash -c \"\$(wget -qLO - https://github.com/community-scripts/ProxmoxVE/raw/main/ct/${app}.sh)\"" >/usr/bin/update
-  chmod +x /usr/bin/update
+  echo "bash -c \"\$(wget -qLO - https://raw.githubusercontent.com/dave-code-creater/ProxmoxVE/refs/heads/jupyter_notebook/ct/${app}.sh)\"" >/usr/bin/update
+  chmod +x /usr/bin/update  chmod +x /usr/bin/update
 
   if [[ -n "${SSH_AUTHORIZED_KEY}" ]]; then
     mkdir -p /root/.ssh
